@@ -71,7 +71,7 @@ func hasStdin() bool {
 }
 
 func main() {
-	flag.DurationVar(&opt.Duration, "d", time.Second, "The time to wait after each processed batch.")
+	flag.DurationVar(&opt.Duration, "d", time.Second, "The time to wait after each processed batch. Valid time units are 'ns', 'us' (or 'µs'), 'ms', 's', 'm', 'h'.")
 	flag.IntVar(&opt.Rate, "r", 1, "The max processing rate per unit of time.")
 	flag.Parse()
 
