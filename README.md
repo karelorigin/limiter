@@ -25,5 +25,12 @@ Usage of limiter:
 ## Examples
 
 ```bash
-echo -e 'dogs\ncats' | limiter -d 1s -r 1 | xargs -I {} curl 'https://myapi.com?search={}'
+echo -e 'dogs\ncats' | limiter -d 1s -r 1 | xargs -I {} -P 5 curl 'https://myapi.com?search={}'
 ```
+
+## Pitfalls
+It is possible that some programs may need minor tweaking to function correctly.
+
+`xargs`, for example, will do input buffering if it becomes too slow, causing it to possibly make multiple calls in a shorter-than-intended timeframe. This can be solved by upping the parallelism count via the `-P` flag.
+
+[httpx](https://github.com/projectdiscovery/httpx), will by default, attempt to read the entire STDIN before finally processing URLs. This can be resolved using the `--stream` flag. Though it's worth noting that httpx has its own rate-limiting functionality.
