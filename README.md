@@ -25,9 +25,5 @@ Usage of limiter:
 ## Examples
 
 ```bash
-echo -e 'foo\nbar' | limiter
-```
-
-```bash
 echo -e 'dogs\ncats' | limiter -d 1s -r 1 | xargs -I {} curl 'https://myapi.com?search={}'
 ```
